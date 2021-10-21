@@ -1,4 +1,6 @@
 import 'package:animal_dex/screens/animal_list_screen.dart';
+import 'package:animal_dex/screens/animal_info_screen.dart';
+import 'package:animal_dex/utils/app_routes.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -8,8 +10,11 @@ void main() {
 class _AnimalDexState extends State<AnimalDex> {
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: AnimalListScreen(),
+    return MaterialApp(
+      routes: {
+        AppRoutes.home: (ctx) => AnimalListScreen(),
+        AppRoutes.animalInfo: (ctx) => AnimalInfo(),
+      },
     );
   }
 }
