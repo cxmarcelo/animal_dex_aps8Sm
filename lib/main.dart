@@ -8,24 +8,8 @@ void main() {
 class _AnimalDexState extends State<AnimalDex> {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(
-          title: const SizedBox(
-            width: double.infinity,
-            child: Text(
-              'AnimalDex',
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 25,
-              ),
-              textAlign: TextAlign.center,
-            ),
-          ),
-          backgroundColor: Colors.green[400],
-        ),
-        body: const AnimalListScreen(),
-      ),
+    return const MaterialApp(
+      home: AnimalListScreen(),
     );
   }
 }

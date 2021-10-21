@@ -17,7 +17,7 @@ class _AnimalListScreenState extends State<AnimalListScreen> {
 
   bool requestError = false;
 
-  List<dynamic> animals = [];
+  List<Animal> animals = [];
 
   void findAnimals() {
     Future<List<dynamic>> future = http
@@ -54,18 +54,30 @@ class _AnimalListScreenState extends State<AnimalListScreen> {
   Widget build(BuildContext context) {
     findAnimals();
 
-    return requestError
-        ? const Center(
-            child: Text("Error na requisição dos Animais"),
-          )
-        : GridView(
-            gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-                maxCrossAxisExtent: 200,
-                childAspectRatio: 1,
-                crossAxisSpacing: 20,
-                mainAxisSpacing: 20),
-            padding: const EdgeInsets.all(15.0),
-            children: animals.map((animal) => AnimalItem(animal)).toList(),
-          );
+    return Scaffold(
+      appBar: AppBar(
+        title: const SizedBox(
+          width: double.infinity,
+          child: Text(
+            'AnimalDex',
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: 25,
+            ),
+            textAlign: TextAlign.center,
+          ),
+        ),
+        backgroundColor: Colors.green[400],
+      ),
+      body: GridView(
+        gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+            maxCrossAxisExtent: 200,
+            childAspectRatio: 1,
+            crossAxisSpacing: 10,
+            mainAxisSpacing: 10),
+        padding: const EdgeInsets.all(15.0),
+        children: animals.map((animal) => AnimalItem(animal)).toList(),
+      ),
+    );
   }
 }
