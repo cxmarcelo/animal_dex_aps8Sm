@@ -8,11 +8,31 @@ class AnimalItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Container(
-        child: Text(animal.popularName),
-        color: Colors.green,
+    return ElevatedButton(
+      child: Column(
+        children: [
+          Text(
+            animal.specie,
+            style: TextStyle(color: Colors.white),
+          ),
+          const Icon(
+            Icons.adb_sharp,
+            color: Colors.white,
+            size: 130.0,
+          ),
+          Container(
+            child: Text("#00" + animal.id.toString()),
+            decoration: new BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.all(Radius.circular(5.0))),
+            width: 45,
+          )
+        ],
       ),
+      style: ButtonStyle(
+          backgroundColor:
+              MaterialStateProperty.all<Color>(Colors.green.shade400)),
+      onPressed: null,
     );
   }
 }

@@ -46,9 +46,7 @@ class _AnimalListScreenState extends State<AnimalListScreen> {
         }).toList();
       });
     }).catchError((error) {
-      setState(() {
-        requestError = true;
-      });
+      setState(() {});
     });
   }
 
@@ -62,8 +60,8 @@ class _AnimalListScreenState extends State<AnimalListScreen> {
           )
         : GridView(
             gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-                maxCrossAxisExtent: 100,
-                childAspectRatio: 3 / 2,
+                maxCrossAxisExtent: 200,
+                childAspectRatio: 1,
                 crossAxisSpacing: 20,
                 mainAxisSpacing: 20),
             padding: const EdgeInsets.all(15.0),
