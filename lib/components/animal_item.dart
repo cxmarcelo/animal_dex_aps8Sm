@@ -2,12 +2,13 @@ import 'package:animal_dex/utils/app_routes.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import '../models/animal.dart';
-import '../screens/animal_info_screen.dart';
 
 class AnimalItem extends StatelessWidget {
   final Animal animal;
 
   const AnimalItem(this.animal, {Key? key}) : super(key: key);
+
+  final String _baseURL = "";
 
   void _selectAnimal(BuildContext context) {
     Navigator.of(context).pushNamed(
@@ -17,6 +18,14 @@ class AnimalItem extends StatelessWidget {
   }
 
   Widget getImage() {
+    if (true) {
+      return Image(
+        image: NetworkImage(
+            'http://192.168.15.6:8080/images/' + animal.id.toString()),
+        height: 120,
+      );
+    }
+
     String path = "";
     if (animal.phylum == "Arthropoda") {
       path = "images/arthropoda.png";
@@ -49,7 +58,7 @@ class AnimalItem extends StatelessWidget {
       child: Container(
         child: Column(
           children: [
-            Text(animal.specie,
+            Text(animal.popularName,
                 style: const TextStyle(color: Colors.white, fontSize: 12)),
             getImage(),
             Container(
@@ -66,8 +75,10 @@ class AnimalItem extends StatelessWidget {
         decoration: BoxDecoration(
           gradient: LinearGradient(
             colors: [
-              Colors.green.withOpacity(0.5),
-              Colors.green,
+              animal.poisonous
+                  ? Colors.purple.withOpacity(0.5)
+                  : Colors.green.withOpacity(0.5),
+              animal.poisonous ? Colors.purple : Colors.green,
             ],
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,

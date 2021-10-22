@@ -13,11 +13,14 @@ class AnimalListScreen extends StatefulWidget {
 }
 
 class _AnimalListScreenState extends State<AnimalListScreen> {
-  final String _baseURL = "http://192.168.15.18:8080";
+  final String _baseURL = "http://192.168.15.6:8080";
 
   bool requestError = false;
-
   List<Animal> animals = [];
+
+  _AnimalListScreenState() {
+    findAnimals();
+  }
 
   void findAnimals() {
     Future<List<dynamic>> future = http
@@ -25,9 +28,8 @@ class _AnimalListScreenState extends State<AnimalListScreen> {
       Uri.parse('$_baseURL/animals'),
     )
         .then((value) {
-      return jsonDecode(value.body);
+      return jsonDecode(utf8.decode(value.bodyBytes));
     });
-
     future.then((animalsList) {
       setState(() {
         animals = animalsList.map((dyn) {
@@ -52,8 +54,6 @@ class _AnimalListScreenState extends State<AnimalListScreen> {
 
   @override
   Widget build(BuildContext context) {
-    findAnimals();
-
     return Scaffold(
       appBar: AppBar(
         title: const SizedBox(
