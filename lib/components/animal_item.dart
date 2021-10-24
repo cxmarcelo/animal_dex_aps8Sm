@@ -21,7 +21,7 @@ class AnimalItem extends StatelessWidget {
     if (true) {
       return Image(
         image: NetworkImage(
-            'http://192.168.15.6:8080/images/' + animal.id.toString()),
+            'http://10.0.2.2:8080/images/' + animal.id.toString()),
         height: 120,
       );
     }
