@@ -21,8 +21,13 @@ class AnimalItem extends StatelessWidget {
     if (true) {
       return Image(
         image: NetworkImage(
-            'http://192.168.15.6:8080/images/' + animal.id.toString()),
+            'http://192.168.15.18:8080/images/' + animal.id.toString()),
         height: 120,
+        errorBuilder: (context, error, stackTrace) => const Icon(
+          Icons.cancel_outlined,
+          color: Colors.white,
+          size: 100.0,
+        ),
       );
     }
 
