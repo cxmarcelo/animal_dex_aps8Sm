@@ -1,3 +1,4 @@
+import 'package:animal_dex/utils/app_config.dart';
 import 'package:animal_dex/utils/app_routes.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -8,8 +9,6 @@ class AnimalItem extends StatelessWidget {
 
   const AnimalItem(this.animal, {Key? key}) : super(key: key);
 
-  final String _baseURL = "";
-
   void _selectAnimal(BuildContext context) {
     Navigator.of(context).pushNamed(
       AppRoutes.animalInfo,
@@ -18,38 +17,16 @@ class AnimalItem extends StatelessWidget {
   }
 
   Widget getImage() {
-    if (true) {
-      return Image(
-        image: NetworkImage(
-            'http://192.168.15.18:8080/images/' + animal.id.toString()),
-        height: 120,
-        errorBuilder: (context, error, stackTrace) => const Icon(
-          Icons.cancel_outlined,
-          color: Colors.white,
-          size: 100.0,
-        ),
-      );
-    }
-
-    String path = "";
-    if (animal.phylum == "Arthropoda") {
-      path = "images/arthropoda.png";
-    } else if (animal.phylum == "Mollusca") {
-      path = "images/mollusca.png";
-    }
-
-    if (path == "") {
-      return const Icon(
+    return Image(
+      image: NetworkImage(
+          AppConfig.apiBaseURL + '/images/' + animal.id.toString()),
+      height: 120,
+      errorBuilder: (context, error, stackTrace) => const Icon(
         Icons.cancel_outlined,
         color: Colors.white,
         size: 100.0,
-      );
-    } else {
-      return Image.asset(
-        path,
-        height: 120,
-      );
-    }
+      ),
+    );
   }
 
   @override

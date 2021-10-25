@@ -1,9 +1,12 @@
 import 'package:animal_dex/models/animal.dart';
+import 'package:animal_dex/utils/app_config.dart';
 import 'package:flutter/material.dart';
 
 class AnimalInfo extends StatelessWidget {
   final double fontSizeFloatingText = 14;
   final EdgeInsets paddingFloatingText = EdgeInsets.all(3);
+
+  AnimalInfo({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -17,8 +20,8 @@ class AnimalInfo extends StatelessWidget {
       )),
       body: Container(
         decoration: BoxDecoration(
-         color: Colors.grey[800],
-          ),
+          color: Colors.grey[800],
+        ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -34,7 +37,7 @@ class AnimalInfo extends StatelessWidget {
                 ),
                 image: DecorationImage(
                   image: NetworkImage(
-                      'http://10.0.2.2:8080/images/' + animal.id.toString()),
+                      AppConfig.apiBaseURL + '/images/' + animal.id.toString()),
                   fit: BoxFit.fill,
                 ),
               ),
@@ -109,10 +112,7 @@ class AnimalInfo extends StatelessWidget {
                   alignment: Alignment.center,
                   child: Text(
                     animal.weight.toString(),
-                    style: TextStyle(
-                      fontSize: 22,
-                      color: Colors.white
-                    ),
+                    style: TextStyle(fontSize: 22, color: Colors.white),
                   ),
                 ),
                 Container(
@@ -121,10 +121,7 @@ class AnimalInfo extends StatelessWidget {
                   alignment: Alignment.center,
                   child: Text(
                     animal.height.toString(),
-                    style: TextStyle(
-                      fontSize: 22,
-                      color: Colors.white
-                    ),
+                    style: TextStyle(fontSize: 22, color: Colors.white),
                   ),
                 ),
               ],
@@ -142,10 +139,9 @@ class AnimalInfo extends StatelessWidget {
                   child: Text(
                     "Description",
                     style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white
-                    ),
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white),
                   ),
                 ),
               ],
@@ -158,10 +154,7 @@ class AnimalInfo extends StatelessWidget {
               alignment: Alignment.topCenter,
               child: Text(
                 animal.description,
-                style: TextStyle(
-                  fontSize: 16,
-                  color: Colors.white
-                ),
+                style: TextStyle(fontSize: 16, color: Colors.white),
               ),
             ),
           ],
