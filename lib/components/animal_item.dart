@@ -16,11 +16,43 @@ class AnimalItem extends StatelessWidget {
     );
   }
 
+  List<Color> getColors() {
+    List<Color> colors = [];
+
+    if (animal.poisonous) {
+      colors.add(Colors.purple.withOpacity(0.5));
+    }
+
+    if (animal.type == "T") {
+      colors.add(Colors.brown);
+    } else if (animal.type == "A") {
+      colors.add(Colors.blue);
+    } else if (animal.type == "AT") {
+      colors.add(Colors.blue);
+      colors.add(Colors.brown);
+    } else if (animal.type == "V") {
+      colors.add(Colors.blue.shade100);
+    } else if (animal.type == "AVT") {
+      colors.add(Colors.blue.shade100);
+      colors.add(Colors.blue);
+      colors.add(Colors.brown);
+    } else {
+      colors.add(Colors.green.withOpacity(0.5));
+      colors.add(Colors.green);
+    }
+
+    if (colors.length <= 1) {
+      colors.add(colors[0].withOpacity(0.5));
+    }
+
+    return colors;
+  }
+
   Widget getImage() {
     return Image(
       image: NetworkImage(
           AppConfig.apiBaseURL + '/images/' + animal.id.toString()),
-      height: 120,
+      height: 115,
       errorBuilder: (context, error, stackTrace) => const Icon(
         Icons.cancel_outlined,
         color: Colors.white,
@@ -40,10 +72,19 @@ class AnimalItem extends StatelessWidget {
       child: Container(
         child: Column(
           children: [
-            Text(animal.popularName,
-                style: const TextStyle(color: Colors.white, fontSize: 12)),
-            getImage(),
             Container(
+              height: 15,
+              child: Text(animal.popularName,
+                  style: const TextStyle(color: Colors.white, fontSize: 12)),
+            ),
+            Container(
+              child: Center(
+                child: getImage(),
+              ),
+              height: 120,
+            ),
+            Container(
+              margin: EdgeInsets.only(top: 5),
               decoration: const BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.all(Radius.circular(5.0))),
@@ -56,12 +97,7 @@ class AnimalItem extends StatelessWidget {
         ),
         decoration: BoxDecoration(
           gradient: LinearGradient(
-            colors: [
-              animal.poisonous
-                  ? Colors.purple.withOpacity(0.5)
-                  : Colors.green.withOpacity(0.5),
-              animal.poisonous ? Colors.purple : Colors.green,
-            ],
+            colors: [...getColors()],
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
           ),
