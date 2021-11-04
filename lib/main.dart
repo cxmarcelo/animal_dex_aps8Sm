@@ -1,3 +1,4 @@
+import 'package:animal_dex/screens/about_screen.dart';
 import 'package:animal_dex/screens/animal_list_screen.dart';
 import 'package:animal_dex/screens/animal_info_screen.dart';
 import 'package:animal_dex/screens/home_screen.dart';
@@ -16,6 +17,7 @@ class _AnimalDexState extends State<AnimalDex> {
         AppRoutes.home: (ctx) => const HomePage(),
         AppRoutes.animalInfo: (ctx) => AnimalInfo(),
         AppRoutes.animalList: (ctx) => AnimalListScreen(),
+        AppRoutes.aboutInfo: (ctx) => AboutScreen(),
       },
     );
   }
