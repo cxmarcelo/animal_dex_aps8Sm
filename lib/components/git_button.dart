@@ -30,10 +30,7 @@ class GitButton extends StatelessWidget {
             padding: const EdgeInsets.all(5),
             child: Row(
               children: [
-                Image.network(
-                  "https://icon-library.com/images/github-icon-white/github-icon-white-6.jpg",
-                  scale: 2,
-                ),
+                Image.asset("images/github_icon.png"),
                 Container(
                   margin: const EdgeInsets.only(left: 10),
                   child: Text(

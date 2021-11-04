@@ -25,15 +25,11 @@ class _AnimalListScreenState extends State<AnimalListScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const SizedBox(
-          width: double.infinity,
-          child: Text(
-            'Animais',
-            style: TextStyle(
-              color: Colors.white,
-              fontSize: 25,
-            ),
-            textAlign: TextAlign.center,
+        title: const Text(
+          'Animais',
+          style: TextStyle(
+            color: Colors.white,
+            fontSize: 25,
           ),
         ),
         backgroundColor: Colors.green[400],

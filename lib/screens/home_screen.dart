@@ -9,7 +9,14 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Center(child: Text("AnimalDex")),
+        title: const Center(
+            child: Text(
+          "AnimalDex",
+          style: TextStyle(
+            color: Colors.white,
+            fontSize: 25,
+          ),
+        )),
         backgroundColor: Colors.green[400],
       ),
       body: Center(
@@ -18,8 +25,7 @@ class HomePage extends StatelessWidget {
             Container(
               margin: const EdgeInsets.only(top: 25, bottom: 25),
               height: 200,
-              child: Image.network(
-                  "https://www.desenvolvesp.com.br/mapadaeconomiapaulista/wp-content/themes/desenvolvesp2019_seade/assets/img/regioes/mapa.png"),
+              child: Image.asset("images/mapa_sp.png"),
             ),
             Column(
               children: const [
