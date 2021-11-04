@@ -25,7 +25,7 @@ class HomePage extends StatelessWidget {
               children: const [
                 HomeButton("Animais", AppRoutes.animalList),
                 HomeButton("Menu", ""),
-                HomeButton("Sobre", ""),
+                HomeButton("Sobre", AppRoutes.aboutInfo),
               ],
               mainAxisAlignment: MainAxisAlignment.center,
             ),

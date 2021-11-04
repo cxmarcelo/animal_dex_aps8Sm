@@ -29,7 +29,7 @@ class AnimalInfo extends StatelessWidget {
             Container(
               height: 200,
               width: double.infinity,
-              margin: EdgeInsets.all(2),
+              margin: const EdgeInsets.all(2),
               decoration: BoxDecoration(
                 border: Border.all(
                   color: Colors.grey,
@@ -48,7 +48,7 @@ class AnimalInfo extends StatelessWidget {
               alignment: Alignment.center,
               child: Text(
                 animal.popularName,
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 26,
                   fontWeight: FontWeight.bold,
                 ),
