@@ -1,12 +1,55 @@
 import 'package:animal_dex/components/type_tag.dart';
 import 'package:animal_dex/models/animal.dart';
+import 'package:animal_dex/models/arguments_animal_item.dart';
+import 'package:animal_dex/services/animal_service.dart';
 import 'package:animal_dex/utils/app_config.dart';
+import 'package:animal_dex/utils/app_routes.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
-class AnimalInfo extends StatelessWidget {
+class AnimalInfo extends StatefulWidget {
+  const AnimalInfo({Key? key}) : super(key: key);
+
+  @override
+  State<AnimalInfo> createState() => _AnimalInfoState();
+}
+
+class _AnimalInfoState extends State<AnimalInfo> {
   final double fontSizeFloatingText = 14;
 
-  const AnimalInfo({Key? key}) : super(key: key);
+  void deleteAnimal(BuildContext context, Animal animal) {
+    AnimalService animalService = Provider.of(context, listen: false);
+    try {
+      animalService.deleteAnimal(animal.id).then((value) =>
+          {Navigator.of(context).pushReplacementNamed(AppRoutes.favorites)});
+    } catch (e) {
+      _showDialog("Erro para deletar animal favorito", "Fechar");
+    }
+  }
+
+  void addAnimalFavorite(BuildContext context, Animal animal) {
+    AnimalService animalService = Provider.of(context, listen: false);
+    try {
+      animalService
+          .addAnimalFavorite(animal.id)
+          .then((value) => {_showDialog("Animal Favorito Inserido", "Ok")});
+    } catch (e) {
+      _showDialog("Erro para favoritar animal", "Fechar");
+    }
+  }
+
+  void _showDialog(String msg, String btnMsg) {
+    showDialog(
+        context: context,
+        builder: (ctx) => AlertDialog(
+              title: Text(msg),
+              actions: [
+                TextButton(
+                    onPressed: () => Navigator.of(context).pop(),
+                    child: Text(btnMsg))
+              ],
+            ));
+  }
 
   List<TypeTag> getTypeTags(Animal animal) {
     List<TypeTag> typeTags = [];
@@ -35,7 +78,10 @@ class AnimalInfo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final Animal animal = ModalRoute.of(context)!.settings.arguments as Animal;
+    final ArgumentsAnimalItem arguments =
+        ModalRoute.of(context)!.settings.arguments as ArgumentsAnimalItem;
+    final bool isFavorite = arguments.isFavorite;
+    final Animal animal = arguments.animal;
 
     return Scaffold(
       appBar: AppBar(
@@ -49,6 +95,14 @@ class AnimalInfo extends StatelessWidget {
           maxLines: 1,
         ),
         elevation: 0,
+        actions: [
+          if (isFavorite)
+            IconButton(
+                icon: const Icon(Icons.delete_sharp),
+                onPressed: () {
+                  deleteAnimal(context, animal);
+                }),
+        ],
       ),
       body: Container(
         decoration: BoxDecoration(
@@ -168,10 +222,23 @@ class AnimalInfo extends StatelessWidget {
                         ),
                       ),
                     ),
-                  )
+                  ),
                 ],
               ),
-            )
+            ),
+            Align(
+              child: Container(
+                width: 50,
+                height: 50,
+                margin: const EdgeInsets.all(5),
+                child: ElevatedButton(
+                  onPressed: () {
+                    addAnimalFavorite(context, animal);
+                  },
+                  child: const Icon(Icons.favorite),
+                ),
+              ),
+            ),
           ],
         ),
       ),

@@ -4,14 +4,14 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../components/animal_item.dart';
 
-class AnimalListScreen extends StatefulWidget {
-  const AnimalListScreen({Key? key}) : super(key: key);
+class AnimalFavoritesScreen extends StatefulWidget {
+  const AnimalFavoritesScreen({Key? key}) : super(key: key);
 
   @override
-  State<AnimalListScreen> createState() => _AnimalListScreenState();
+  State<AnimalFavoritesScreen> createState() => _AnimalFavoritesScreenState();
 }
 
-class _AnimalListScreenState extends State<AnimalListScreen> {
+class _AnimalFavoritesScreenState extends State<AnimalFavoritesScreen> {
   bool requestError = false;
 
   late Future<List<Animal>> futureAnimals;
@@ -20,7 +20,7 @@ class _AnimalListScreenState extends State<AnimalListScreen> {
   void initState() {
     super.initState();
     AnimalService animalService = Provider.of(context, listen: false);
-    futureAnimals = animalService.findAnimals();
+    futureAnimals = animalService.findAnimalsFavorites();
   }
 
   @override
@@ -28,7 +28,7 @@ class _AnimalListScreenState extends State<AnimalListScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text(
-          'Animais',
+          'Animais Favoritos',
           style: TextStyle(
             color: Colors.white,
             fontSize: 25,
@@ -52,7 +52,7 @@ class _AnimalListScreenState extends State<AnimalListScreen> {
                     mainAxisSpacing: 10),
                 padding: const EdgeInsets.all(15.0),
                 children: snapshot.data!
-                    .map((animal) => AnimalItem(animal, false))
+                    .map((animal) => AnimalItem(animal, true))
                     .toList());
           }
           return const Center(

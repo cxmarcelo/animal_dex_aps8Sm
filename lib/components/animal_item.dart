@@ -1,3 +1,4 @@
+import 'package:animal_dex/models/arguments_animal_item.dart';
 import 'package:animal_dex/utils/app_config.dart';
 import 'package:animal_dex/utils/app_routes.dart';
 import 'package:flutter/foundation.dart';
@@ -6,13 +7,14 @@ import '../models/animal.dart';
 
 class AnimalItem extends StatelessWidget {
   final Animal animal;
+  final bool isFavorite;
 
-  const AnimalItem(this.animal, {Key? key}) : super(key: key);
+  const AnimalItem(this.animal, this.isFavorite, {Key? key}) : super(key: key);
 
   void _selectAnimal(BuildContext context) {
     Navigator.of(context).pushNamed(
       AppRoutes.animalInfo,
-      arguments: animal,
+      arguments: ArgumentsAnimalItem(animal, isFavorite),
     );
   }
 

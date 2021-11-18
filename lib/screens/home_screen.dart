@@ -30,7 +30,7 @@ class HomePage extends StatelessWidget {
             Column(
               children: const [
                 HomeButton("Animais", AppRoutes.animalList),
-                HomeButton("Menu", ""),
+                HomeButton("Favoritos", AppRoutes.favorites),
                 HomeButton("Sobre", AppRoutes.aboutInfo),
               ],
               mainAxisAlignment: MainAxisAlignment.center,
